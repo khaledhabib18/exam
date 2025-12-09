@@ -1,11 +1,15 @@
 const express = require("express");
 const sequelize = require("./models/config");
+require("./models/index");
 require("dotenv").config();
 const cors = require("cors");
 const PORT = process.env.PORT || 3000;
 const app = express();
 const userRoutes = require("./routes/userRoute");
 const examRoutes = require("./routes/examRoute");
+const questionRoutes = require("./routes/questionRoute");
+
+app.use("/api/v1/questions", questionRoutes);
 
 app.use("/api/v1/exams", examRoutes);
 
