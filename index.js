@@ -6,13 +6,13 @@ const PORT = process.env.PORT || 3000;
 const app = express();
 const userRoutes = require("./routes/userRoute");
 
-app.use("/", userRoutes);
+app.use("/api/v1/", userRoutes);
 app.use(express.json());
 app.use(cors());
 
 
 
-sequelize.sync({ force: true }).then(() => {
+sequelize.sync().then(() => {
     console.log("Database synced");
 }).catch((error) => {
     console.error("Error syncing database:", error);
