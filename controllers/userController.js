@@ -6,9 +6,7 @@ require('dotenv').config();
 
 // this function creates the token for the user
 const createSignToken = (user) => {
-    return jwt.sign({ id: user.id, email: user.email }, process.env.JWT_SECRET, {
-        expiresIn: process.env.JWT_EXPIRES_IN || '1h',
-    });
+    return jwt.sign({ id: user.id, email: user.email }, process.env.JWT_SECRET);
 };
 
 const signup = async (req, res) => {
