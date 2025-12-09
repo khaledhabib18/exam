@@ -3,7 +3,6 @@ const bcrypt = require("bcryptjs");
 
 async function createAdmin(req, res) {
     const adminData = req.body;
-    console.log();
     try {
         const adminExists = await User.findOne({ where: { email: adminData.email } });
         if (!adminExists) {

@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
-const { User } = require('../models/userModel');
+const User = require('../models/userModel');
+const { all } = require('../routes/userRoute');
 require('dotenv').config();
 
 const authenticate = async (req, res, next) => {
@@ -35,9 +36,12 @@ const authenticate = async (req, res, next) => {
 };
 
 const authorize = (...allowedRoles) => {
-    return (req, res, next) => {
-        if (!req.user) return res.status(401).json({ message: 'Not authenticated' });
-        if (!allowedRoles.includes(req.user.role)) {
+    return async (req, res, next) => {
+        if (!req.headers.authorization) return res.status(401).json({ message: 'Not authenticated' });
+        const token = req.headers.authorization;
+        const payload = jwt.verify(token, process.env.JWT_SECRET);
+        const reqUser = (await User.findOne({ where: { id: payload.id } })).dataValues;
+        if (!allowedRoles.includes(reqUser.role)) {
             return res.status(403).json({ message: 'Forbidden: insufficient permissions' });
         }
         next();
