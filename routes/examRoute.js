@@ -2,10 +2,7 @@ const express = require('express');
 const examRoutes = express.Router();
 const cors = require('cors');
 const { authorize } = require('../middlewares/auth');
-const createExam = require('../controllers/createExam')
-const getExams = require('../controllers/getExams');
-const deleteExam = require('../controllers/deleteExam');
-const updateExam = require('../controllers/updateExam');
+const { createExam, getExams, updateExam, deleteExam } = require('../controllers/examController');
 examRoutes.use(express.json());
 examRoutes.use(cors());
 
