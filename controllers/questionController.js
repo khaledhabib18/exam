@@ -1,6 +1,5 @@
 const Question = require("../models/questionModel");
 
-// Create a new question
 const createQuestion = async (req, res) => {
     try {
         const question = await Question.create(req.body);

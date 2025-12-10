@@ -7,13 +7,11 @@ const authenticate = async (req, res, next) => {
     try {
         const authHeader = req.headers.authorization;
         let token;
-
         if (authHeader && authHeader.startsWith('Bearer ')) {
             token = authHeader.split(' ')[1];
         } else if (req.cookies && req.cookies.token) {
             token = req.cookies.token;
         }
-
         if (!token) {
             return res.status(401).json({ message: 'Not authenticated: token missing' });
         }
@@ -38,7 +36,7 @@ const authenticate = async (req, res, next) => {
 const authorize = (...allowedRoles) => {
     return async (req, res, next) => {
         if (!req.headers.authorization) return res.status(401).json({ message: 'Not authenticated' });
-        const token = req.headers.authorization;
+        const token = req.headers.authorization.split(' ')[1];
         const payload = jwt.verify(token, process.env.JWT_SECRET);
         const reqUser = (await User.findOne({ where: { id: payload.id } })).dataValues;
         if (!allowedRoles.includes(reqUser.role)) {

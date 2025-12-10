@@ -8,12 +8,13 @@ const app = express();
 const userRoutes = require("./routes/userRoute");
 const examRoutes = require("./routes/examRoute");
 const questionRoutes = require("./routes/questionRoute");
+const attemptRoutes = require("./routes/attemptRoute");
 
+app.use("/api/v1/attempts", attemptRoutes);
 app.use("/api/v1/questions", questionRoutes);
-
 app.use("/api/v1/exams", examRoutes);
-
 app.use("/api/v1/", userRoutes);
+
 app.use(express.json());
 app.use(cors());
 
