@@ -1,10 +1,23 @@
 const Question = require("../models/questionModel");
-
+const Option = require("../models/optionModel");
+const { Op } = require("sequelize");
 const createQuestion = async (req, res) => {
     try {
-        const question = await Question.create(req.body);
-        console.log(question);
-        res.status(201).json(question);
+        const question = await Question.create({
+            question_text: req.body.question_text,
+            question_type: req.body.question_type,
+            examId: req.query.examId,
+            correct_answer_label: req.body.correct_answer_label
+        });
+        const options = req.body.options;
+        await Option.bulkCreate(
+            options.map(option => ({
+                option_text: option.text,
+                option_label: option.label,
+                question_id: question.dataValues.id
+            }))
+        );
+        res.status(201).json({ question });
     } catch (error) {
         res.status(400).json({ error: error.message });
     }

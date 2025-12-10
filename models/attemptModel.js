@@ -23,6 +23,10 @@ const Attempt = sequelize.define("Attempt", {
     examId: {
         type: DataTypes.INTEGER,
         allowNull: false
+    },
+    score: {
+        type: DataTypes.INTEGER,
+        allowNull: true
     }
 },
     {
