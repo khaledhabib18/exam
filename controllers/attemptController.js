@@ -4,7 +4,7 @@ const getUserIdFromReq = require('../utils/getUserIdFromReq');
 const checkIfInTime = require("../utils/checkIfinTime");
 
 const createAttempt = async (req, res) => {
-    if (!(await checkIfInTime(req, res, req.query.examId))) {
+    if (!(await checkIfInTime(req, res))) {
         return res.status(403).json({ error: "Exam is not currently active" });
     }
     else {
@@ -24,7 +24,7 @@ const createAttempt = async (req, res) => {
     }
 };
 const finishAttempt = async (req, res) => {
-    if (!(await checkIfInTime(req, res, req.query.examId))) {
+    if (!(await checkIfInTime(req, res))) {
         return res.status(403).json({ error: "Exam time is out" });
     }
     else {

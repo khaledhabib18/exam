@@ -1,10 +1,9 @@
 const e = require("express");
 const Exam = require("../models/examModel");
-const { DateTime } = require('luxon');
 
-const checkIfInTime = async (req, res, examId) => {
+const checkIfInTime = async (req, res) => {
     try {
-        const exam = await Exam.findByPk(examId);
+        const exam = await Exam.findByPk(req.query.examId);
         if (!exam) {
             return false;
         }
