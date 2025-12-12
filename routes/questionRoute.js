@@ -6,7 +6,7 @@ const { createQuestion, deleteQuestion, getExamQuestions } = require('../control
 questionRoutes.use(express.json());
 questionRoutes.use(cors());
 
-questionRoutes.post("/create-question", authorize('teacher'), createQuestion);
-questionRoutes.delete("/delete-question", authorize('teacher'), deleteQuestion);
-questionRoutes.get("/exam-questions", authorize('teacher', 'student'), getExamQuestions);
+questionRoutes.post("/question", authorize('teacher'), createQuestion);
+questionRoutes.delete("/question", authorize('teacher'), deleteQuestion);
+questionRoutes.get("/question", authorize('teacher', 'student'), getExamQuestions);
 module.exports = questionRoutes;

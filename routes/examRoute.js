@@ -7,8 +7,8 @@ examRoutes.use(express.json());
 examRoutes.use(cors());
 
 
-examRoutes.post("/create-exam", authorize('teacher'), createExam);
-examRoutes.get("/get-exams", authorize('student', 'teacher'), getExams);
-examRoutes.delete("/delete-exam", authorize('teacher'), deleteExam);
-examRoutes.put("/update-exam", authorize('teacher'), updateExam);
+examRoutes.post("/exam", authorize('teacher'), createExam);
+examRoutes.get("/exam", authorize('student', 'teacher'), getExams);
+examRoutes.delete("/exam", authorize('teacher'), deleteExam);
+examRoutes.put("/exam", authorize('teacher'), updateExam);
 module.exports = examRoutes;

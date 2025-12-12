@@ -7,6 +7,6 @@ attemptRoutes.use(cors());
 const { createAttempt, finishAttempt } = require('../controllers/attemptController');
 
 
-attemptRoutes.post("/start-exam", authorize('student'), createAttempt);
-attemptRoutes.post("/finish-exam", authorize('student'), finishAttempt);
+attemptRoutes.post("/attempt", authorize('student'), createAttempt);
+attemptRoutes.put("/attempt", authorize('student'), finishAttempt);
 module.exports = attemptRoutes;
