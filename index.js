@@ -9,7 +9,9 @@ const userRoutes = require("./routes/userRoute");
 const examRoutes = require("./routes/examRoute");
 const questionRoutes = require("./routes/questionRoute");
 const attemptRoutes = require("./routes/attemptRoute");
+const answerRoutes = require("./routes/answerRoute");
 
+app.use("/api/v1/answers", answerRoutes);
 app.use("/api/v1/attempts", attemptRoutes);
 app.use("/api/v1/questions", questionRoutes);
 app.use("/api/v1/exams", examRoutes);
