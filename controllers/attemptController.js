@@ -1,7 +1,7 @@
 const Attempt = require("../models/attemptModel");
 const { get } = require("../routes/userRoute");
 const getUserIdFromReq = require('../utils/getUserIdFromReq');
-const checkIfInTime = require("../utils/checkIfinTime");
+const checkIfInTime = require("../utils/checkIfInTime");
 
 const createAttempt = async (req, res) => {
     if (!(await checkIfInTime(req, res))) {
