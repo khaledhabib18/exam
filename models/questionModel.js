@@ -20,6 +20,10 @@ const Question = sequelize.define("Question", {
     correct_answer_label: {
         type: ENUM('A', 'B', 'C', 'D', 'True', 'False'),
         allowNull: false,
+    },
+    examId: {
+        type: DataTypes.UUID,
+        allowNull: false,
     }
 });
 

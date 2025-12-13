@@ -9,7 +9,6 @@ async function createAdmin(req, res) {
             adminData.role = "teacher";
             adminData.password = bcrypt.hashSync(adminData.password, 10);
             await User.create(adminData);
-            console.log("Admin user created");
             res.status(201).json({ message: "Admin user created successfully" });
         }
         else {

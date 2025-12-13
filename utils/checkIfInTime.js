@@ -7,7 +7,7 @@ const checkIfInTime = async (req, res) => {
         if (!exam) {
             return false;
         }
-        const currentTime = new Date("2025-12-10T11:20:00.000Z");
+        const currentTime = new Date();
         console.log(currentTime);
         console.log(exam.start_time);
         if (currentTime >= exam.start_time && currentTime <= exam.end_time) {

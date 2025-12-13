@@ -1,6 +1,7 @@
 const Question = require("../models/questionModel");
 const Option = require("../models/optionModel");
 const { Op } = require("sequelize");
+const e = require("express");
 const createQuestion = async (req, res) => {
     try {
         const question = await Question.create({
@@ -39,11 +40,17 @@ const deleteQuestion = async (req, res) => {
 
 const getExamQuestions = async (req, res) => {
     try {
-        const { examId } = req.query;
+        const examId = req.query.examId;
+        console.log(examId);
         const questions = await Question.findAll({
             where: { examId },
-            attributes: ["id", "question_text", "question_type", "examId"]
+            attributes: ["id", "question_text", "question_type", "examId"],
+            include: {
+                model: Option,
+                as: 'options'
+            }
         });
+
         res.status(200).json(questions);
     } catch (error) {
         res.status(500).json({ error: error.message });

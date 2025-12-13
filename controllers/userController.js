@@ -10,15 +10,13 @@ const createSignToken = (user) => {
 };
 
 const signup = async (req, res) => {
-
     try {
         const { email, password, name } = req.body; // destructuring 
         const hashed = await bcrypt.hash(password, 12); // hashing the password 
 
         // TODO replace it with repositories function instead of direct model access
         const user = await User.create({ email, password: hashed, name });
-        const token = createSignToken(user);
-        res.status(201).json({ token, user: { id: user.id, email: user.email } });
+        res.status(201).json({ message: 'User created successfully', userId: user.id });
     } catch (err) { res.status(500).json({ message: 'Signup failed', error: err.message }); }
 };
 
@@ -35,7 +33,7 @@ const login = async (req, res) => {
 
         const token = createSignToken(user);
 
-        res.json({ token, user: { id: user.id, email: user.email } });
+        res.json({ token, user: { role: user.role } });
     } catch (err) { res.status(500).json({ message: 'Login failed', error: err.message }); }
 };
 

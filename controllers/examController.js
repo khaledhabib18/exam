@@ -12,7 +12,6 @@ const createExam = (req, res) => {
 };
 
 const getExams = (req, res) => {
-    console.log(req.query);
     if (req.query && req.query.id) {
         Exam.findByPk(req.query.id)
             .then((exam) => {
@@ -59,6 +58,7 @@ const updateExam = (req, res) => {
 
 
 const deleteExam = (req, res) => {
+    console.log("DELETE");
     const examId = req.query.id;
     if (!examId) {
         return res.status(400).json({ message: "Exam ID is required" });
