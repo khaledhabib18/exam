@@ -20,9 +20,9 @@ app.use(express.json());
 app.use(cors());
 
 sequelize.sync({ force: false }).then(() => {
-    // console.log("Database synced");
+    console.log("Database synced");
 }).catch((error) => {
-    // console.error("Error syncing database:", error);
+    console.error("Error syncing database:", error);
 });
 
 module.exports = app;

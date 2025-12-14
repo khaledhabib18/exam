@@ -1,8 +1,9 @@
 const { Sequelize } = require("sequelize");
+require("dotenv").config();
 
-const sequelize = new Sequelize({
-    dialect: "sqlite",
-    storage: "database.sqlite",
+const databaseUrl = process.env.DATABASE_URL;
+
+const sequelize = new Sequelize(databaseUrl, {
     logging: false,
 });
 

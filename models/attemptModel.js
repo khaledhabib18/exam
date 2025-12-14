@@ -17,11 +17,11 @@ const Attempt = sequelize.define("Attempt", {
         allowNull: true,
     },
     userId: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
         allowNull: false
     },
     examId: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
         allowNull: false
     },
     score: {

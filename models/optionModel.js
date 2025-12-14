@@ -17,7 +17,7 @@ const Option = sequelize.define("Option", {
         allowNull: false,
     },
     question_id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
         allowNull: false,
     }
 });
