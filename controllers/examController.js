@@ -2,7 +2,9 @@ const Exam = require("../models/examModel.js");
 
 const createExam = (req, res) => {
     req.body.start_time = new Date(req.body.start_time);
+    req.body.start_time = req.body.start_time.toISOString();
     req.body.end_time = new Date(req.body.end_time);
+    req.body.end_time = req.body.end_time.toISOString();
     Exam.create(req.body)
         .then((exam) => {
             res.status(201).json({ message: "Exam created successfully", exam });
