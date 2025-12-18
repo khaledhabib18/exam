@@ -2,9 +2,7 @@ const Exam = require("../models/examModel.js");
 
 const createExam = (req, res) => {
     req.body.start_time = new Date(req.body.start_time);
-    req.body.start_time = req.body.start_time.toISOString();
     req.body.end_time = new Date(req.body.end_time);
-    req.body.end_time = req.body.end_time.toISOString();
     Exam.create(req.body)
         .then((exam) => {
             res.status(201).json({ message: "Exam created successfully", exam });
@@ -22,6 +20,8 @@ const getExams = (req, res) => {
                 if (!exam) {
                     return res.status(404).json({ message: "Exam not found" });
                 }
+                exam.dataValues.start_time = new Date(exam.dataValues.start_time).getTime();
+                exam.dataValues.end_time = new Date(exam.dataValues.end_time).getTime();
                 res.status(200).json({ exam });
             })
             .catch((error) => {
@@ -32,6 +32,10 @@ const getExams = (req, res) => {
     else {
         Exam.findAll()
             .then((exams) => {
+                exams.forEach((exam) => {
+                    exam.dataValues.start_time = new Date(exam.dataValues.start_time).getTime();
+                    exam.dataValues.end_time = new Date(exam.dataValues.end_time).getTime();
+                });
                 res.status(200).json({ exams });
             })
             .catch((error) => {
